@@ -145,3 +145,47 @@ Processing by ReviewsController#index as HTML
 Completed 200 OK in 113ms (Views: 45.0ms | ActiveRecord: 22.6ms | Allocations: 13554)
 
 
+Started POST "/products/1/reviews" for ::1 at 2021-02-24 22:46:22 -0600
+Processing by ReviewsController#create as */*
+  Parameters: {"title"=>"Hello", "content"=>"Hello Hello", "author"=>"Sean", "product_id"=>"1", "review"=>{"title"=>"Hello", "content"=>"Hello Hello", "author"=>"Sean"}}
+Completed 500 Internal Server Error in 49ms (ActiveRecord: 18.7ms | Allocations: 3486)
+
+
+  
+NoMethodError (undefined method `save' for nil:NilClass):
+  
+app/controllers/reviews_controller.rb:17:in `create'
+Started GET "/products/1/reviews" for ::1 at 2021-02-24 22:47:15 -0600
+Processing by ReviewsController#index as HTML
+  Parameters: {"product_id"=>"1"}
+  [1m[36mProduct Load (1.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/reviews_controller.rb:6:in `index'
+  [1m[36mReview Load (1.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."product_id" = $1[0m  [["product_id", 1]]
+  ↳ app/controllers/reviews_controller.rb:8:in `index'
+Completed 200 OK in 38ms (Views: 6.3ms | ActiveRecord: 2.8ms | Allocations: 6323)
+
+
+Started POST "/products/1/reviews" for ::1 at 2021-02-24 22:48:48 -0600
+Processing by ReviewsController#create as */*
+  Parameters: {"title"=>"Hello", "content"=>"Hello Hello", "author"=>"Sean", "product_id"=>"1", "review"=>{"title"=>"Hello", "content"=>"Hello Hello", "author"=>"Sean"}}
+Completed 500 Internal Server Error in 80ms (ActiveRecord: 24.5ms | Allocations: 3326)
+
+
+  
+NoMethodError (undefined method `save' for nil:NilClass):
+  
+app/controllers/reviews_controller.rb:17:in `create'
+Started POST "/products/1/reviews" for ::1 at 2021-02-24 22:49:19 -0600
+Processing by ReviewsController#create as */*
+  Parameters: {"title"=>"Hello", "content"=>"Hello Hello", "author"=>"Sean", "product_id"=>"1", "review"=>{"title"=>"Hello", "content"=>"Hello Hello", "author"=>"Sean"}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/reviews_controller.rb:17:in `create'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/reviews_controller.rb:17:in `create'
+  [1m[36mReview Create (1.6ms)[0m  [1m[32mINSERT INTO "reviews" ("title", "content", "author", "created_at", "updated_at", "product_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hello"], ["content", "Hello Hello"], ["author", "Sean"], ["created_at", "2021-02-25 04:49:19.264886"], ["updated_at", "2021-02-25 04:49:19.264886"], ["product_id", 1]]
+  ↳ app/controllers/reviews_controller.rb:17:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/reviews_controller.rb:17:in `create'
+Completed 201 Created in 55ms (Views: 0.9ms | ActiveRecord: 22.9ms | Allocations: 9724)
+
+
